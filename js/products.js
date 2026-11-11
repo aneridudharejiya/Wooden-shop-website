@@ -1,6 +1,8 @@
 /**
- * YASH MARKETING - Centralized Product Catalogue Database
- * =======================================================
+ * YASH MARKETING - Centralized Product Catalogue Database & SEO Registry
+ * ======================================================================
+ * Brand: YASH MARKETING – Premium Wooden Products & Home Decor in Surat
+ * Live Website: https://aneridudharejiya.github.io/Wooden-shop-website/
  * 
  * HOW TO EDIT OR ADD PRODUCTS:
  * 1. To edit an existing product: Change the text inside the quotes for that product below.
@@ -15,21 +17,86 @@
 
 const BUSINESS_CONFIG = {
   name: "YASH MARKETING",
+  brandTitle: "YASH MARKETING | Premium Wooden Products & Home Decor in Surat",
+  siteUrl: "https://aneridudharejiya.github.io/Wooden-shop-website/",
   phone: "+91 94293 14554",
   phoneRaw: "919429314554",
   tagline: "Elevate Your Home. Experience Premium Living.",
+  brandMessage: "Discover stylish, trending, and premium-quality wooden products that transform ordinary spaces into beautiful, organized, and elegant homes.",
   address: "311, Eden Square, Opp. Palanpore Fire Station, Gauravpath Road, Surat, Gujarat, India",
-  city: "Surat, Gujarat, India",
+  city: "Surat",
+  state: "Gujarat",
+  country: "India",
+  postalCode: "395009",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=311%2C%20Eden%20Square%2C%20Opp.%20Palanpore%20Fire%20Station%2C%20Gauravpath%20Road%2C%20Surat%2C%20Gujarat",
   mapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.648057279313!2d72.7818!3d21.2061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d1c15f4837f%3A0x6b8dd98e29bc1a3a!2sEden%20Square%2C%20Gaurav%20Path%2C%20Palanpur%20Gam%2C%20Surat%2C%20Gujarat%20395009!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
 };
+
+/**
+ * Scalable Category Architecture
+ * Supports current active wooden hangers/organizers and upcoming home decor lines.
+ */
+const CATEGORIES = [
+  {
+    id: "all",
+    name: "All Products",
+    filterKey: "all",
+    isComingSoon: false,
+    description: "Browse our complete range of handcrafted wooden products and home accessories in Surat."
+  },
+  {
+    id: "wooden-hangers",
+    name: "Wooden Hangers",
+    filterKey: "Wooden Hangers",
+    isComingSoon: false,
+    description: "Designer wooden wall hangers, coat racks, and entryway hooks crafted with solid timber."
+  },
+  {
+    id: "wooden-organizers",
+    name: "Wooden Organizers",
+    filterKey: "Wooden Organizers",
+    isComingSoon: false,
+    description: "Multi-hook wooden organizers for bedrooms, bathrooms, and entryway storage."
+  },
+  {
+    id: "wooden-wall-decor",
+    name: "Wooden Wall Decor",
+    filterKey: "Wooden Wall Decor",
+    isComingSoon: true,
+    description: "Artistic wooden wall accents, acoustic timber panels, and carved decor pieces."
+  },
+  {
+    id: "wooden-shelves",
+    name: "Wooden Shelves",
+    filterKey: "Wooden Shelves",
+    isComingSoon: true,
+    description: "Floating solid wood shelves and display ledges for modern living spaces."
+  },
+  {
+    id: "wooden-accessories",
+    name: "Wooden Accessories",
+    filterKey: "Wooden Accessories",
+    isComingSoon: true,
+    description: "Handcrafted wooden tabletop trays, organizers, and everyday home accents."
+  },
+  {
+    id: "other-wooden-products",
+    name: "Other Wooden Products",
+    filterKey: "Other Wooden Products",
+    isComingSoon: true,
+    description: "Bespoke custom wooden interior products and architectural decor pieces."
+  }
+];
 
 const PRODUCTS = [
   {
     id: "natural-wooden-wall-hanger",
     name: "Natural Wooden Wall Hanger",
-    category: "Wall-Mounted Hangers",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Warm Natural Oak Wall Rack with Ergonomic Curved Hooks",
+    seoTitle: "Natural Wooden Wall Hanger | Premium Wooden Products Surat | YASH MARKETING",
+    metaDescription: "Buy or enquire for Natural Wooden Wall Hangers in Surat. Solid wood multi-hook wall rack for scarves, hats, jewelry & accessories by YASH MARKETING Gujarat.",
     shortDescription: "Signature multi-hook wooden wall rack with graceful curved hangers, perfect for scarves, hats, jewelry, and everyday accessories.",
     fullDescription: "The Natural Wooden Wall Hanger brings organic warmth and refined craftsmanship to dressing areas, entryways, and bedrooms. Designed with smooth, curved hooks that support delicate fabrics without snagging, this piece elevates everyday organization into an interior design statement.",
     features: [
@@ -54,8 +121,11 @@ const PRODUCTS = [
   {
     id: "minimalist-geometric-wooden-hanger",
     name: "Minimalist Geometric Wooden Hanger",
-    category: "Minimalist & Geometric",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Architectural Zigzag Design in Warm Walnut Tones",
+    seoTitle: "Minimalist Geometric Wooden Hanger | Wooden Home Decor Surat | YASH MARKETING",
+    metaDescription: "Modern architectural geometric wooden wall hanger in warm walnut tones. Perfect for contemporary entryways and living rooms. Enquire at YASH MARKETING Surat.",
     shortDescription: "Modern architectural wooden hanger featuring an eye-catching geometric zig-zag profile for contemporary homes.",
     fullDescription: "A fusion of sculptural modern art and practical daily utility. The Minimalist Geometric Wooden Hanger features an angular rhythm that looks stunning on your wall even when unoccupied. Ideal above an entryway console, living room accent wall, or home study.",
     features: [
@@ -80,8 +150,11 @@ const PRODUCTS = [
   {
     id: "premium-walnut-finish-wall-hanger",
     name: "Premium Walnut-Finish Wall Hanger",
-    category: "Wall-Mounted Hangers",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Deep Walnut Multi-Slat Organizer with High-Capacity Hooks",
+    seoTitle: "Premium Walnut-Finish Wall Hanger | Wooden Interior Decor Surat | YASH MARKETING",
+    metaDescription: "Luxury deep walnut finish wall rack with alternating timber battens for jackets, handbags & coats. Premium wooden products by YASH MARKETING Surat, Gujarat.",
     shortDescription: "Luxury deep walnut finish wall rack featuring alternating vertical slats for jackets, handbags, and daily essentials.",
     fullDescription: "Crafted for discerning homeowners who appreciate the depth of dark wood tones. The Premium Walnut-Finish Wall Hanger features sturdy alternating timber battens that provide generous hanging space for winter jackets, trench coats, luxury handbags, and hats.",
     features: [
@@ -106,8 +179,11 @@ const PRODUCTS = [
   {
     id: "multi-hook-wooden-wall-organizer",
     name: "Multi-Hook Wooden Wall Organizer",
-    category: "Multi-Hook Organizers",
+    category: "Wooden Organizers",
+    categorySlug: "wooden-organizers",
     tagline: "Clean-Lined Wooden Rail for Bathrooms, Spas & Dressing Suites",
+    seoTitle: "Multi-Hook Wooden Wall Organizer | Wooden Home Accessories Surat | YASH MARKETING",
+    metaDescription: "Moisture-sealed clean-profile wooden hook rail for towels, robes & bathroom accessories. Premium wooden organizer from YASH MARKETING Surat, Gujarat.",
     shortDescription: "Moisture-resistant, clean-profile wooden hook rail suited for towels, bathrobes, grooming accessories, and luxury bathrooms.",
     fullDescription: "Bring spa-inspired tranquility to your washrooms and wellness areas. The Multi-Hook Wooden Wall Organizer features cleanly spaced rectangular hooks designed to hold plush bath sheets, hand towels, body brushes, and loungewear with natural sophistication.",
     features: [
@@ -132,8 +208,11 @@ const PRODUCTS = [
   {
     id: "modern-wooden-entryway-hanger",
     name: "Modern Wooden Entryway Hanger",
-    category: "Entryway Organizers",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Full-Length Entryway Oak Rack for Outerwear & Everyday Essentials",
+    seoTitle: "Modern Wooden Entryway Hanger | Wooden Wall Hangers Surat | YASH MARKETING",
+    metaDescription: "Full-length oak entryway wooden hanger rack designed for foyer console tables and coat storage. Enquire on WhatsApp with YASH MARKETING Surat.",
     shortDescription: "Comprehensive entryway wooden rack tailored for styling above foyer tables, keeping coats, bags, and umbrellas arranged.",
     fullDescription: "Make coming home an organized pleasure. Positioned gracefully above your console table or entryway bench, this full-length natural oak rack accommodates coats, laptop bags, scarves, and key rings, creating an inviting first impression for guests.",
     features: [
@@ -158,8 +237,11 @@ const PRODUCTS = [
   {
     id: "artisan-slat-wooden-wall-rack",
     name: "Artisan Slat Wooden Wall Rack",
-    category: "Minimalist & Geometric",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Vertical Slat Accent Rack with Angled Wooden Pegs",
+    seoTitle: "Artisan Slat Wooden Wall Rack | Premium Wooden Products | YASH MARKETING Surat",
+    metaDescription: "Artisan staggered vertical slat wooden wall rack with angled retention pegs. Handcrafted wooden interior decor by YASH MARKETING Surat, Gujarat.",
     shortDescription: "Unique vertical slat rack featuring angled pegs that cast architectural shadows and hold bags, coats, and keys with style.",
     fullDescription: "An artistic wall feature that brings movement and warmth to plain walls. Crafted with staggered timber slats and angled retention pegs, this rack securely holds tote bags, hats, and keys while serving as a centerpiece of organic wooden craftsmanship.",
     features: [
@@ -184,8 +266,11 @@ const PRODUCTS = [
   {
     id: "classic-two-tone-slat-hanger",
     name: "Classic Two-Tone Slat Hanger",
-    category: "Wall-Mounted Hangers",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Contrasting Timber Battens with Diagonal Peg Hooks",
+    seoTitle: "Classic Two-Tone Slat Hanger | Wooden Wall Hooks Surat | YASH MARKETING",
+    metaDescription: "Hand-assembled dual tone wooden slat hanger with diagonal peg hooks. Decorative wooden home decor piece from YASH MARKETING Surat, Gujarat.",
     shortDescription: "Hand-assembled wall rack featuring alternating light and dark wood tones, ideal for purses, keys, and accessories.",
     fullDescription: "Celebrating the natural diversity of wood tones, this hanger combines lighter honey tones with darker walnut timber battens. Complete with smooth diagonal retention pegs, it is as delightful to look at as it is convenient for daily use.",
     features: [
@@ -210,8 +295,11 @@ const PRODUCTS = [
   {
     id: "heritage-multi-peg-wall-organizer",
     name: "Heritage Multi-Peg Wall Organizer",
-    category: "Multi-Hook Organizers",
+    category: "Wooden Organizers",
+    categorySlug: "wooden-organizers",
     tagline: "7-Station Wooden Rail with Turned Round Pegs",
+    seoTitle: "Heritage Multi-Peg Wall Organizer | Wooden Home Decor Surat | YASH MARKETING",
+    metaDescription: "Heavy-duty 7-peg solid hardwood wall organizer for family outerwear, jackets, hats & bags. Handcrafted by YASH MARKETING Surat, Gujarat.",
     shortDescription: "Heavy-duty wall rack with 7 sturdy turned wooden pegs, crafted to accommodate jackets, hats, scarves, and bags.",
     fullDescription: "The quintessential family organizer. Featuring 7 turned wooden pegs mounted on a substantial horizontal crossbeam with vertical accent battens, this piece easily organizes outerwear, caps, scarves, and umbrellas for the whole family.",
     features: [
@@ -236,8 +324,11 @@ const PRODUCTS = [
   {
     id: "studio-vertical-slat-hanger",
     name: "Studio Vertical Slat Coat Rack",
-    category: "Wall-Mounted Hangers",
+    category: "Wooden Hangers",
+    categorySlug: "wooden-hangers",
     tagline: "Clean Architectural Rail with Brass Hardware Accents",
+    seoTitle: "Studio Vertical Slat Coat Rack | Wooden Decor Shop Surat | YASH MARKETING",
+    metaDescription: "Executive vertical slat wooden coat rack with brass-toned accents. Refined Scandinavian wooden interior products by YASH MARKETING Surat.",
     shortDescription: "Sleek vertical slat wall coat rack with brass-toned bolt accents, ideal for professional briefcases and outerwear.",
     fullDescription: "A tailored design designed for executive studies, home offices, and modern apartments. Crisp vertical slats paired with warm timber horizontal rails and brass-accented fasteners deliver a timeless, refined Scandinavian elegance.",
     features: [
@@ -274,7 +365,7 @@ function getWhatsAppUrl(productName = null, extraMessage = null) {
   } else if (extraMessage) {
     text = `Hello YASH MARKETING, ${extraMessage}`;
   } else {
-    text = "Hello YASH MARKETING, I am interested in your wooden hangers and home décor collection. Please share more details.";
+    text = "Hello YASH MARKETING, I am interested in your premium wooden products and home décor collection in Surat. Please share more details.";
   }
   return `https://wa.me/${BUSINESS_CONFIG.phoneRaw}?text=${encodeURIComponent(text)}`;
 }
@@ -282,6 +373,7 @@ function getWhatsAppUrl(productName = null, extraMessage = null) {
 // Make accessible in both modern ES / browser scripts
 if (typeof window !== "undefined") {
   window.PRODUCTS = PRODUCTS;
+  window.CATEGORIES = CATEGORIES;
   window.BUSINESS_CONFIG = BUSINESS_CONFIG;
   window.getWhatsAppUrl = getWhatsAppUrl;
 }

@@ -1,6 +1,7 @@
 /**
  * YASH MARKETING - Core Interactive Script
  * Handles navigation, product rendering, routing, filtering, and WhatsApp integrations
+ * Brand: YASH MARKETING – Premium Wooden Products & Home Decor in Surat
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,17 +75,30 @@ function initWhatsAppButtons() {
 }
 
 /**
+ * Resolves path to a product detail view based on current folder depth
+ */
+function getProductPageUrl(productId) {
+  const isInsideProductsDir = window.location.pathname.includes("/products/");
+  const encodedId = encodeURIComponent(productId);
+  return isInsideProductsDir ? `${encodedId}.html` : `products/${encodedId}.html`;
+}
+
+/**
  * Creates HTML for a standard product card
  */
 function createProductCardHTML(product) {
   const productWaUrl = window.getWhatsAppUrl(product.name);
+  const detailUrl = getProductPageUrl(product.id);
+  const isInsideProductsDir = window.location.pathname.includes("/products/");
+  const imageSrc = isInsideProductsDir ? `../${product.image}` : product.image;
+
   return `
     <article class="product-card" data-category="${product.category}">
       <div class="product-card-image">
-        <a href="product.html?id=${encodeURIComponent(product.id)}" aria-label="View details of ${product.name}">
+        <a href="${detailUrl}" aria-label="View details of ${product.name} - YASH MARKETING Surat">
           <img 
-            src="${product.image}" 
-            alt="${product.name} - Premium wooden wall-mounted hanger by YASH MARKETING Surat"
+            src="${imageSrc}" 
+            alt="${product.name} - Handcrafted wooden product by YASH MARKETING Surat, Gujarat"
             loading="lazy"
           />
         </a>
@@ -93,7 +107,7 @@ function createProductCardHTML(product) {
       <div class="product-card-content">
         <span class="product-category-tag">${product.category}</span>
         <h3 class="product-card-title">
-          <a href="product.html?id=${encodeURIComponent(product.id)}">${product.name}</a>
+          <a href="${detailUrl}">${product.name}</a>
         </h3>
         <p class="product-card-desc">${product.shortDescription}</p>
         <div class="product-card-footer">
@@ -102,10 +116,10 @@ function createProductCardHTML(product) {
             <span class="product-price-val">${product.priceText}</span>
           </div>
           <div class="product-card-buttons">
-            <a href="product.html?id=${encodeURIComponent(product.id)}" class="btn btn-outline btn-sm">
+            <a href="${detailUrl}" class="btn btn-outline btn-sm">
               View Details
             </a>
-            <a href="${productWaUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+            <a href="${productWaUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" aria-label="Enquire for ${product.name} on WhatsApp">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.584 1.961.949 2.796.949 3.178 0 5.767-2.587 5.767-5.766.001-3.182-2.585-5.769-5.767-5.769zm10.218 5.766c.001 5.485-4.457 9.945-9.947 9.945-1.741 0-3.371-.453-4.793-1.246l-5.509 1.443 1.472-5.378c-.89-1.473-1.405-3.2-1.405-5.044 0-5.484 4.458-9.945 9.947-9.945 5.488 0 9.947 4.461 9.947 9.945z"/>
               </svg>
@@ -131,7 +145,7 @@ function renderFeaturedProducts() {
 }
 
 /* --------------------------------------------------------------------------
-   Collection Page: Category Filtering & Live Search
+   Collection Page: Scalable Category Filtering & Live Search
    -------------------------------------------------------------------------- */
 function initCollectionPage() {
   const container = document.getElementById("collection-products-container");
@@ -144,9 +158,68 @@ function initCollectionPage() {
   let currentCategory = "all";
   let searchQuery = "";
 
+  // Check URL query parameters for category deep-linking (e.g. ?category=wooden-organizers)
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedCat = urlParams.get("category");
+  if (requestedCat) {
+    const matchingBtn = Array.from(filterBtns).find(btn => {
+      const f = btn.getAttribute("data-filter") || "";
+      return f.toLowerCase().includes(requestedCat.toLowerCase()) || 
+             btn.getAttribute("data-category-id") === requestedCat;
+    });
+    if (matchingBtn) {
+      filterBtns.forEach(b => b.classList.remove("active"));
+      matchingBtn.classList.add("active");
+      currentCategory = matchingBtn.getAttribute("data-filter") || "all";
+    }
+  }
+
   function filterAndRender() {
+    // Check if the current selected category is a "Coming Soon" category
+    const catMetadata = window.CATEGORIES?.find(c => 
+      c.filterKey === currentCategory || 
+      c.id === currentCategory ||
+      (currentCategory === "all" && c.id === "all")
+    );
+
+    if (catMetadata && catMetadata.isComingSoon) {
+      container.innerHTML = `
+        <div class="coming-soon-card" style="grid-column: 1 / -1; text-align: center; padding: 60px 24px; background: white; border-radius: 12px; border: 1px solid var(--border-medium); box-shadow: var(--shadow-sm);">
+          <span class="section-eyebrow">Upcoming Collection</span>
+          <h3 style="font-size: 1.75rem; color: var(--dark-walnut); margin: 8px 0 12px;">${catMetadata.name} &bull; Launching Soon</h3>
+          <p style="color: var(--text-secondary); max-width: 620px; margin: 0 auto 24px; line-height: 1.7;">
+            ${catMetadata.description} We are preparing new designs to elevate your home. Connect with us on WhatsApp to register for early previews, bespoke dimensions, or architect/interior designer enquiries.
+          </p>
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <a href="${window.getWhatsAppUrl(null, `I am interested in early previews and custom orders for ${catMetadata.name}.`)}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.584 1.961.949 2.796.949 3.178 0 5.767-2.587 5.767-5.766.001-3.182-2.585-5.769-5.767-5.769zm10.218 5.766c.001 5.485-4.457 9.945-9.947 9.945-1.741 0-3.371-.453-4.793-1.246l-5.509 1.443 1.472-5.378c-.89-1.473-1.405-3.2-1.405-5.044 0-5.484 4.458-9.945 9.947-9.945 5.488 0 9.947 4.461 9.947 9.945z"/>
+              </svg>
+              Enquire About Upcoming ${catMetadata.name}
+            </a>
+            <button id="view-active-products-btn" class="btn btn-outline">
+              View Available Products
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("view-active-products-btn")?.addEventListener("click", () => {
+        currentCategory = "all";
+        filterBtns.forEach(b => b.classList.toggle("active", b.getAttribute("data-filter") === "all"));
+        filterAndRender();
+      });
+
+      if (countDisplay) {
+        countDisplay.textContent = `${catMetadata.name} collection is coming soon`;
+      }
+      return;
+    }
+
     const filtered = window.PRODUCTS.filter(product => {
-      const matchesCategory = currentCategory === "all" || product.category.toLowerCase().includes(currentCategory.toLowerCase());
+      const matchesCategory = currentCategory === "all" || 
+                              product.category.toLowerCase().includes(currentCategory.toLowerCase()) ||
+                              (product.categorySlug && product.categorySlug.toLowerCase().includes(currentCategory.toLowerCase()));
       const matchesSearch = product.name.toLowerCase().includes(searchQuery) ||
                             product.shortDescription.toLowerCase().includes(searchQuery) ||
                             product.category.toLowerCase().includes(searchQuery);
@@ -156,7 +229,7 @@ function initCollectionPage() {
     if (filtered.length === 0) {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: white; border-radius: 12px; border: 1px solid var(--border-subtle);">
-          <h3 style="font-size: 1.5rem; color: var(--dark-walnut); margin-bottom: 10px;">No wooden hangers found</h3>
+          <h3 style="font-size: 1.5rem; color: var(--dark-walnut); margin-bottom: 10px;">No wooden products found</h3>
           <p style="color: var(--text-secondary); margin-bottom: 24px;">Try searching with different terms or reset your category filter.</p>
           <button id="reset-filter-btn" class="btn btn-outline btn-sm">Reset Filters</button>
         </div>
@@ -173,7 +246,7 @@ function initCollectionPage() {
     }
 
     if (countDisplay) {
-      countDisplay.textContent = `Showing ${filtered.length} of ${window.PRODUCTS.length} wooden hanger designs`;
+      countDisplay.textContent = `Showing ${filtered.length} of ${window.PRODUCTS.length} available wooden products`;
     }
   }
 
@@ -200,7 +273,7 @@ function initCollectionPage() {
 }
 
 /* --------------------------------------------------------------------------
-   Product Detail Page Dynamic Loader
+   Product Detail Page Dynamic Loader (For product.html fallback)
    -------------------------------------------------------------------------- */
 function initProductDetailPage() {
   const container = document.getElementById("product-detail-container");
@@ -219,25 +292,25 @@ function initProductDetailPage() {
   }
 
   // Update page title and meta
-  document.title = `${product.name} | YASH MARKETING Surat`;
+  document.title = product.seoTitle || `${product.name} | YASH MARKETING Surat`;
 
   const waUrl = window.getWhatsAppUrl(product.name);
   const gallery = product.galleryImages && product.galleryImages.length > 0 ? product.galleryImages : [product.image];
 
   container.innerHTML = `
-    <div class="breadcrumbs">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span class="sep">/</span>
       <a href="collection.html">Our Collection</a>
       <span class="sep">/</span>
-      <span>${product.name}</span>
-    </div>
+      <span aria-current="page">${product.name}</span>
+    </nav>
 
     <div class="product-detail-grid">
       <!-- Media Showcase -->
       <div class="detail-gallery-box">
         <div class="detail-gallery-main">
-          <img id="main-product-img" src="${product.image}" alt="${product.name} - YASH MARKETING Surat" />
+          <img id="main-product-img" src="${product.image}" alt="${product.name} - Handcrafted wooden product by YASH MARKETING Surat, Gujarat" />
         </div>
         ${gallery.length > 1 ? `
           <div class="detail-gallery-thumbs">
@@ -300,7 +373,7 @@ function initProductDetailPage() {
 
         <!-- CTA Buttons -->
         <div class="detail-cta-row">
-          <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="flex: 1.4;">
+          <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="flex: 1.4;" aria-label="Enquire for ${product.name} on WhatsApp">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.584 1.961.949 2.796.949 3.178 0 5.767-2.587 5.767-5.766.001-3.182-2.585-5.769-5.767-5.769zm10.218 5.766c.001 5.485-4.457 9.945-9.947 9.945-1.741 0-3.371-.453-4.793-1.246l-5.509 1.443 1.472-5.378c-.89-1.473-1.405-3.2-1.405-5.044 0-5.484 4.458-9.945 9.947-9.945 5.488 0 9.947 4.461 9.947 9.945z"/>
             </svg>
@@ -359,7 +432,7 @@ function initContactForm() {
     window.PRODUCTS.forEach(p => {
       const opt = document.createElement("option");
       opt.value = p.name;
-      opt.textContent = p.name;
+      opt.textContent = `${p.name} (${p.category})`;
       productSelect.appendChild(opt);
     });
   }
@@ -380,7 +453,7 @@ function initContactForm() {
 
     const name = nameInput?.value.trim() || "";
     const phone = phoneInput?.value.trim() || "";
-    const selectedProd = productSelect?.value || "General Wooden Hanger Enquiry";
+    const selectedProd = productSelect?.value || "Wooden Products & Home Decor Enquiry";
     const msg = messageInput?.value.trim() || "";
 
     // Validation
@@ -397,7 +470,7 @@ function initContactForm() {
     }
 
     // Build pre-filled WhatsApp message with user's inputs
-    const composedMessage = `Hello YASH MARKETING,\n\nName: ${name}\nPhone: ${phone}\nProduct of Interest: ${selectedProd}\nMessage: ${msg || 'I would like to inquire about designs, pricing, and availability.'}`;
+    const composedMessage = `Hello YASH MARKETING,\n\nName: ${name}\nPhone: ${phone}\nProduct/Category of Interest: ${selectedProd}\nMessage: ${msg || 'I would like to inquire about designs, pricing, and availability.'}`;
     const waUrl = `https://wa.me/${window.BUSINESS_CONFIG.phoneRaw}?text=${encodeURIComponent(composedMessage)}`;
 
     // Show genuine success status and prompt user to launch WhatsApp
@@ -424,7 +497,7 @@ function initContactForm() {
   if (waDirectBtn) {
     waDirectBtn.addEventListener("click", () => {
       const name = nameInput?.value.trim() || "Customer";
-      const selectedProd = productSelect?.value || "Wooden Hangers";
+      const selectedProd = productSelect?.value || "Wooden Products & Home Decor";
       const composed = `Hello YASH MARKETING, I am ${name} interested in ${selectedProd}. Please share product catalog and details.`;
       window.open(`https://wa.me/${window.BUSINESS_CONFIG.phoneRaw}?text=${encodeURIComponent(composed)}`, "_blank", "noopener,noreferrer");
     });

@@ -1,51 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
-    <loc>https://yashmarketing.com/index.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/collection.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/index.html</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Collection Page -->
+  <url>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/collection.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Dynamic Product View Fallback -->
   <url>
-    <loc>https://yashmarketing.com/product.html?id=natural-wooden-wall-hanger</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/product.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Dedicated Crawlable Product Pages -->
+  <url>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/natural-wooden-wall-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/product.html?id=minimalist-geometric-wooden-hanger</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/minimalist-geometric-wooden-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/product.html?id=premium-walnut-finish-wall-hanger</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/premium-walnut-finish-wall-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/product.html?id=multi-hook-wooden-wall-organizer</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/multi-hook-wooden-wall-organizer.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/product.html?id=modern-wooden-entryway-hanger</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/modern-wooden-entryway-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://yashmarketing.com/product.html?id=artisan-slat-wooden-wall-rack</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/artisan-slat-wooden-wall-rack.html</loc>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/classic-two-tone-slat-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/heritage-multi-peg-wall-organizer.html</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://aneridudharejiya.github.io/Wooden-shop-website/products/studio-vertical-slat-hanger.html</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 </urlset>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yashmarketing.com/sitemap.xml
+Sitemap: https://aneridudharejiya.github.io/Wooden-shop-website/sitemap.xml
